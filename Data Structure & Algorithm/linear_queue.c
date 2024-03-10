@@ -70,6 +70,7 @@ int isfull(Queue *q)
     }
 }
 
+// Enqueue
 void enqueue(Queue *q, int value)
 {
     if (isfull(q))
@@ -84,7 +85,19 @@ void enqueue(Queue *q, int value)
 }
 
 // dequeue opereation
-
+int dequeue(Queue *q, int value)
+{
+    if (isEmpty(q))
+    {
+        printf("Queue is Empty");
+        exit(1);
+    }
+    else
+    {
+        printf("The deleted item = %d", q->items[q->front]);
+        q->front++;
+    }
+}
 int main()
 {
     Queue q;
@@ -92,8 +105,16 @@ int main()
 
     enqueue(&q, 20);
     enqueue(&q, 24);
-    printf("The Queue: \n");
+    enqueue(&q, 29);
+    printf("The Queue inserted: \n");
     for (int i = 0; i <= q.rear; i++)
+    {
+        printf("%d\t", q.items[i]);
+    }
+
+    dequeue(&q, 30);
+    printf("\nThe Queue deleted: \n");
+    for (int i = 0; i <= q.front; i++)
     {
         printf("%d\t", q.items[i]);
     }
