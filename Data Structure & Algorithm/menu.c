@@ -53,7 +53,7 @@ int main()
     printf("Enter the no. of choice: ");
     scanf("%d", &n);
     printf("\n*** Stack Operation Using Array ***\n");
-    while (choice != 4)
+    do
     {
         printf("\n\nChoose any one fromm the below options:: ");
         printf("\n1. PUSH\n2. POP\n3. Traverse\n4. Exit\n");
@@ -77,7 +77,7 @@ int main()
         default:
             printf("\nEnter a valid choice...\n");
         }
-    }
+    }while (choice != 4);
 
     return 0;
 }
