@@ -1,7 +1,7 @@
 /*
+// ! using of structure  (Structure Implementation)
 
 #include <stdio.h>
-
 #define MAX_SIZE 100
 
 // Define the structure for the Queue
@@ -17,12 +17,26 @@ void enqueue(Queue *q, int value)
 {
     if (q->rear == MAX_SIZE - 1)
     {
-        printf("Queue is full. Cannot enqueue.\n");
+        printf("\nQueue is full. Cannot Enqueue.\n");
     }
     else
     {
         q->rear++;
         q->items[q->rear] = value;
+    }
+}
+
+// Function to dequeue an element from the queue
+void dequeue(Queue *q)
+{
+    if (q->front == -1 && q->rear == -1)
+    {
+        printf("\nQueue is Empty.");
+    }
+    else
+    {
+        q->items[q->front];
+        q->front++;
     }
 }
 
@@ -34,10 +48,21 @@ int main()
     enqueue(&q, 10);
     enqueue(&q, 20);
     enqueue(&q, 30);
+    enqueue(&q, 233);
 
     // Displaying the queue
     printf("Queue: ");
-    for (int i = 0; i <= q.rear; i++)
+    for (int i = q.front; i <= q.rear; i++)
+    {
+        printf("%d ", q.items[i]);
+    }
+
+    dequeue(&q);
+    dequeue(&q);
+
+    // Displaying the dequeue
+    printf("\nDequeue: ");
+    for (int i = q.front; i <= q.rear; i++)
     {
         printf("%d ", q.items[i]);
     }
@@ -45,78 +70,78 @@ int main()
 
     return 0;
 }
-
 */
 
+// ! Without using of structure  (Array Implementation)
 #include <stdio.h>
-#include <stdlib.h>
+#define maxSize 30
+int rear = -1, front = -1, item[maxSize];
 
-#define maxSize 1
-
-typedef struct linear_queue
+int isFull()
 {
-    int rear, front, items[maxSize];
-} Queue;
-
-int isfull(Queue *q)
-{
-    if (q->rear == maxSize - 1)
+    if (rear == maxSize - 1)
     {
         return 1;
     }
+    return 0;
+}
+
+int isEmpty()
+{
+    if (rear == -1 && front == -1)
+    {
+        return 1;
+    }
+    return 0;
+}
+void Enqueue(int newItem)
+{
+    if (isFull())
+    {
+        printf("The Queue is Full.\n");
+    }
     else
     {
-        return 0;
+        rear++;
+        item[rear] = newItem;
+    }
+}
+void Dequeue()
+{
+    if (isEmpty())
+    {
+        printf("The Queue is Empty.\n");
+    }
+    else
+    {
+        item[front];
+        front++;
+        printf("\nDeleted Item: %d", item[front]);
     }
 }
 
-// Enqueue
-void enqueue(Queue *q, int value)
-{
-    if (isfull(q))
-    {
-        printf("\nThe Queue is full");
-    }
-    else
-    {
-        q->rear++;
-        q->items[q->rear] = value;
-    }
-}
-
-// dequeue opereation
-int dequeue(Queue *q, int value)
-{
-    if (isEmpty(q))
-    {
-        printf("Queue is Empty");
-        exit(1);
-    }
-    else
-    {
-        printf("The deleted item = %d", q->items[q->front]);
-        q->front++;
-    }
-}
 int main()
 {
-    Queue q;
-    q.front = q.rear = -1;
+    // initilization
+    int i;
+    Enqueue(43);
+    Enqueue(13);
+    Enqueue(100);
 
-    enqueue(&q, 20);
-    enqueue(&q, 24);
-    enqueue(&q, 29);
-    printf("The Queue inserted: \n");
-    for (int i = 0; i <= q.rear; i++)
+    printf("Enqueue Items: \n");
+    for (i = front + 1; i <= rear; i++)
     {
-        printf("%d\t", q.items[i]);
+        printf("%d\t", item[i]);
     }
 
-    dequeue(&q, 30);
-    printf("\nThe Queue deleted: \n");
-    for (int i = 0; i <= q.front; i++)
+    Dequeue();
+    Dequeue();
+    printf("\nAfter Dqueue Items: \n");
+    for (i = front + 1; i <= rear; i++)
     {
-        printf("%d\t", q.items[i]);
+        printf("%d\t", item[i]);
     }
+    printf("\n");
+
     return 0;
 }
