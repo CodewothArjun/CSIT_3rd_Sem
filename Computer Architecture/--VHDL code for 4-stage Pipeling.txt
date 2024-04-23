@@ -1,0 +1,61 @@
+--VHDL code for 4-stage Pipeling
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity pip_4stage is
+    Port (
+        clk    : in  STD_LOGIC;
+        reset  : in  STD_LOGIC;
+        input  : in  STD_LOGIC_VECTOR(7 downto 0);
+        output : out STD_LOGIC_VECTOR(7 downto 0)
+    );
+end pip_4stage;
+
+architecture Behavioral of pip_4stage is
+
+    type stage is (FETCH, DECODE, EXECUTE, WRITEBACK);
+    signal current_stage, next_stage : stage;
+    signal fetch_data, decode_data, execute_data, writeback_data : STD_LOGIC_VECTOR(7 downto 0);
+
+begin
+
+    -- Pipeline stages
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            current_stage <= FETCH;
+        elsif rising_edge(clk) then
+            current_stage <= next_stage;
+        end if;
+    end process;
+
+    -- State transitions
+    process(current_stage)
+    begin
+        case current_stage is
+            when FETCH =>
+                -- Fetch stage: fetch instruction/data
+                fetch_data <= input; -- Assuming input is instruction/data to fetch
+                next_stage <= DECODE;
+            when DECODE =>
+                -- Decode stage: decode instruction
+                decode_data <= fetch_data; -- Assuming decode logic here
+                next_stage <= EXECUTE;
+            when EXECUTE =>
+                -- Execute stage: execute operation
+                execute_data <= decode_data; -- Assuming execution logic here
+                next_stage <= WRITEBACK;
+            when WRITEBACK =>
+                -- Writeback stage: write result
+                writeback_data <= execute_data; -- Assuming writeback logic here
+                output <= writeback_data; -- Output the result
+                next_stage <= FETCH;
+            when others =>
+                next_stage <= FETCH; -- Default to FETCH stage
+        end case;
+    end process;
+
+end Behavioral;
