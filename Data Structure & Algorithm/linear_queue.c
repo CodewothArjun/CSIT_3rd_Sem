@@ -1,5 +1,5 @@
 /*
-// ! using of structure  (Structure Implementation)
+//  using of structure  (Structure Implementation)
 
 #include <stdio.h>
 #define MAX_SIZE 100
