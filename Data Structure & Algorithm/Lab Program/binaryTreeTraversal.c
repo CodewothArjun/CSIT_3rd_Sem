@@ -1,6 +1,5 @@
-/*
-Write a program to Implement binary tree and traverse tree with user’s choice (Inorder, Preorder, Postorder).
-*/
+// Write a program to Implement binary tree and traverse tree with user’s choice (Inorder, Preorder, Postorder).
+
 #include <stdio.h>
 #include <stdlib.h>
 
