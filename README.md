@@ -1,2 +1,6 @@
 This is a Repo of 3rd sem csit.
-**Data Structure
+<br/> Data Structure
+<br/> Computer Graphics
+<br/> Numerical Methods
+<br/> Computer Architecture
+<br/> Statistics-II
